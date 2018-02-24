@@ -25,12 +25,14 @@ public class TryStreamTest {
 
   @Test
   public void testFilter() {
-    LOG.info("filter : {}", names.filter(s -> s.startsWith("song")).toArray());
+    Stream<String> result = names.filter(s -> s.startsWith("song"));
+    LOG.info("filter : {}", result.toArray());
   }
 
   @Test
   public void testMap() {
-    LOG.info("map : {}", names.map(s -> "new-" + s).toArray());
+    Stream<String> result = names.map(s -> "new-" + s);
+    LOG.info("map : {}", result.toArray());
   }
 
   @Test
