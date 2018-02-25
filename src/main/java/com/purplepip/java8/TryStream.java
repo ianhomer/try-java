@@ -20,11 +20,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class TryStream {
-  private List<String> names = Arrays.asList("song1", "song2", "riff1");
+  private List<Song> names = Arrays.asList(
+      new Song().name("song1").length(5),
+      new Song().name("song2").length(10),
+      new Song().name("riff1").length(3)
+  );
   private static final BiConsumer<String, String> LOG_RESULT =
       (label, result) -> LOG.info("{} : {}", label, result);
 
@@ -36,18 +44,35 @@ public class TryStream {
   public static void main(String[] args) {
     LOG.info("filter : {}", (Object) new TryStream().tryFilter().toArray());
     LOG.info("map : {}", (Object) new TryStream().tryMap().toArray());
-    new TryStream().tryReduce().ifPresent(result -> LOG_RESULT.accept("reduce", result));
+    new TryStream().tryReduce()
+        .ifPresent(result -> LOG_RESULT.accept("reduce", result.toString()));
   }
 
-  public Stream<String> tryFilter() {
-    return names.stream().filter(s -> s.startsWith("song"));
+  public Stream<Song> tryFilter() {
+    return names.stream().filter(s -> s.name().startsWith("song"));
   }
 
-  public Stream<String> tryMap() {
-    return names.stream().map(s -> "new-" + s);
+  public Stream<Song> tryMap() {
+    return names.stream().map(s -> s.name("new-" + s.name()));
   }
 
-  public Optional<String> tryReduce() {
-    return names.stream().reduce((x, y) -> "( " + x + " , " + y + " )");
+  /**
+   * Reduce.
+   */
+  public Optional<Song> tryReduce() {
+    return names.stream().reduce((x, y) ->
+        new Song().name("( " + x.name() + " , " + y.name() + " )")
+            .length(x.length() + y.length()));
+  }
+
+  @Accessors(fluent = true)
+  @ToString
+  public static class Song {
+    @Getter
+    @Setter
+    private String name;
+    @Getter
+    @Setter
+    private int length;
   }
 }
