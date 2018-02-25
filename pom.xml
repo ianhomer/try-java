@@ -10,6 +10,10 @@
   <artifactId>try-java8</artifactId>
   <name>Try Java 8</name>
 
+  <properties>
+    <jacoco.argLine/>
+  </properties>
+
   <repositories>
     <repository>
       <id>purplepip-releases</id>

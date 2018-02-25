@@ -1,0 +1,3 @@
+mvn dependency:build-classpath -DincludeTypes=jar -Dmdep.outputFile=target/cp.txt
+echo "Starting JShell with classpath "`cat target/cp.txt`:target/classes
+jshell --startup startup.jsh --class-path `cat target/cp.txt`:target/classes

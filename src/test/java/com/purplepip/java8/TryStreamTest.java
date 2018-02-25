@@ -15,29 +15,18 @@
 
 package com.purplepip.java8;
 
-import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 @Slf4j
 public class TryStreamTest {
-  private Stream<String> names = Stream.of("song1", "song2", "riff1");
-
   @Test
-  public void testFilter() {
-    Stream<String> result = names.filter(s -> s.startsWith("song"));
-    LOG.info("filter : {}", result.toArray());
-  }
-
-  @Test
-  public void testMap() {
-    Stream<String> result = names.map(s -> "new-" + s);
-    LOG.info("map : {}", result.toArray());
+  public void testTry() {
+    TryStream.main(new String[0]);
   }
 
   @Test
   public void testReduce() {
-    names.reduce((x, y) -> "( " + x + " , " + y + " )")
-        .ifPresent(s -> LOG.info("reduce : {}", s));
+    new TryStream().tryReduce();
   }
 }
