@@ -18,25 +18,17 @@ package com.purplepip.java8;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BiConsumer;
 import java.util.stream.Stream;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class TryStream {
   private List<Song> names = Arrays.asList(
       new Song().name("song1").length(5),
       new Song().name("song2").length(10),
       new Song().name("song22").length(15),
-      new Song().name("riff1").length(3)
+      new Song().name("riff1").length(3),
+      new Song().name("riff2").length(4)
   );
-
-  private static final BiConsumer<String, String> LOG_RESULT =
-      (label, result) -> LOG.info("{} : {}", label, result);
+  private static ValueLogger LOGGER = new ValueLogger(TryStream.class);
 
   /**
    * Try main.
@@ -44,12 +36,12 @@ public class TryStream {
    * @param args arguments
    */
   public static void main(String[] args) {
-    new ValueLogger("filter").log(new TryStream().tryFilter());
-    new ValueLogger("map").log(new TryStream().tryMap());
-    new ValueLogger("sum").log(new TryStream().trySum());
-    new ValueLogger("laziness").log(new TryStream().tryLaziness());
-    new TryStream().tryReduce()
-        .ifPresent(result -> LOG_RESULT.accept("reduce", result.toString()));
+    Thread.currentThread().setName("main()");
+    LOGGER.child("filter").info(new TryStream().tryFilter());
+    LOGGER.child("map").info(new TryStream().tryMap());
+    LOGGER.child("sum").info(new TryStream().trySum());
+    LOGGER.child("laziness").info(new TryStream().tryLaziness());
+    LOGGER.child("reduce").info(new TryStream().tryReduce().orElse(null));
   }
 
   /**
@@ -63,19 +55,19 @@ public class TryStream {
    * Demonstrate that intermediate operations do not get executed until necessary.
    */
   public long tryLaziness() {
-    ValueLogger logger = new ValueLogger("laziness", 1);
+    ValueLogger logger = LOGGER.child("laziness");
     return names.stream()
-        .peek(s -> logger.log("peek1", s.name()))
+        .peek(logger.child("peek1")::info)
         .filter(s -> {
-          logger.log("filter1", s.name());
+          logger.child("filter1").info(s.name());
           return s.name().startsWith("song");
         })
-        .peek(s -> logger.log("peek2", s.name()))
+        .peek(logger.child("peek3")::info)
         .filter(s -> {
-          logger.log("filter2", s.name());
+          logger.child("filter2").info(s.name());
           return s.name().endsWith("2");
         })
-        .peek(s -> logger.log("peek3", s.name()))
+        .peek(logger.child("peek3")::info)
         .count();
   }
 
@@ -100,20 +92,5 @@ public class TryStream {
    */
   public int trySum() {
     return names.stream().mapToInt(Song::length).sum();
-  }
-
-  @Accessors(fluent = true)
-  @ToString
-  public static class Song {
-    @Getter
-    @Setter
-    private String name;
-    @Getter
-    @Setter
-    private int length;
-
-    public Song copy() {
-      return new Song().name(name).length(length);
-    }
   }
 }

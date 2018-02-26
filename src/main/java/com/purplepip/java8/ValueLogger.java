@@ -16,53 +16,50 @@
 package com.purplepip.java8;
 
 import java.util.stream.Stream;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
 public class ValueLogger {
-  private String category;
-  private String subCategory;
-  private int depth;
-  private String label;
+  private final Logger log;
+  private final String category;
+  private final int depth;
+  private final String prefix;
 
-  public ValueLogger(String category) {
-    this(category, null);
-  }
-
-  public ValueLogger(String category, String subCategory) {
-    this(category, subCategory, 0);
-  }
-
-  public ValueLogger(String category, int depth) {
-    this(category, null, depth);
+  public ValueLogger(Class<?> clazz) {
+    this(clazz.getName(), 0);
   }
 
   /**
-   * Create a new value logger.
+   * Create a value logger.
    *
-   * @param category category
-   * @param subCategory sub-category
-   * @param depth depth of logging statement
+   * @param category category of logger
+   * @param depth depth of logger
    */
-  public ValueLogger(String category, String subCategory, int depth) {
+  public ValueLogger(String category, int depth) {
     this.category = category;
-    this.subCategory = subCategory;
+    log = LoggerFactory.getLogger(category);
     this.depth = depth;
-
-    label = new String(new char[depth]).replace("\0", " ...")
-        + category
-        + (subCategory == null ? "" : "." + subCategory);
+    this.prefix = new String(new char[depth]).replace("\0", " .");
   }
 
-  public void log(Object value) {
-    LOG.info("{} : {} ", label, value);
+  public ValueLogger child(String category) {
+    return new ValueLogger(this.category + "." + category, depth + 1);
   }
 
-  public void log(String subCategory, Object value) {
-    LOG.info("{}.{} : {} ", label, subCategory, value);
+  /**
+   * Output info.
+   *
+   * @param value value to output
+   */
+  public void info(Object value) {
+    log.info("{} : {} ", prefix, value);
   }
 
-  public void log(Stream<?> stream) {
-    LOG.info("{} : {} ", label, stream.toArray());
+  public void info(Named value) {
+    log.info("{} : {} ", prefix, value.name());
+  }
+
+  public void info(Stream<?> stream) {
+    log.info("{} : {} ", prefix, stream.toArray());
   }
 }
