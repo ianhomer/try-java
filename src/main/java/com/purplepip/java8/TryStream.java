@@ -39,6 +39,15 @@ public class TryStream {
   }
 
   /**
+   * Stream iterator.
+   */
+  public Iterator<Song> tryIterator() {
+    return names.stream()
+        .filter(s -> s.name().startsWith("song"))
+        .iterator();
+  }
+
+  /**
    * Demonstrate that intermediate operations do not get executed until necessary.
    */
   public long tryLaziness() {
@@ -67,22 +76,13 @@ public class TryStream {
   }
 
   /**
-   * Stream iterator.
-   */
-  public Iterator<Song> tryIterator() {
-    return names.stream()
-        .filter(s -> s.name().startsWith("song"))
-        .iterator();
-  }
-
-  /**
    * Reduce stream of songs into one song.
    */
   public Song tryReduce() {
     return names.stream()
         .reduce((x, y) ->
-          new Song().name(x.name() + ":" + y.name()).length(x.length() + y.length())
-    ).orElseThrow(IllegalStateException::new);
+            new Song().name(x.name() + ":" + y.name()).length(x.length() + y.length())
+        ).orElseThrow(IllegalStateException::new);
   }
 
   /**
