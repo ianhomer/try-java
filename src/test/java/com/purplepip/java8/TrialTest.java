@@ -15,6 +15,27 @@
 
 package com.purplepip.java8;
 
-public interface Named {
-  String name();
+import static org.junit.Assert.assertEquals;
+
+import com.purplepip.trial.Trial;
+import org.junit.Test;
+
+public class TrialTest {
+  @Test
+  public void testTrial() {
+    Trial trial = new Trial(TrySomething.class);
+    trial.run();
+    assertEquals(1, trial.getExecutionCount());
+  }
+
+  @Test
+  public void testMain() {
+    Trial.main(new String[] {"com.purplepip.java8.TrialTest$TrySomething"});
+  }
+
+  public static class TrySomething {
+    public String trySomething() {
+      return "something";
+    }
+  }
 }

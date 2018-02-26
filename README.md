@@ -2,8 +2,12 @@
 
 Java 8 exercises.
 
-# JShell
+# Command line execution
 
-Start up JShell with classpath from maven project with
+Run all trials
 
-    mshell
+    mvn exec:java
+
+Or just matching one
+    
+    mvn exec:java -Dtry=laziness

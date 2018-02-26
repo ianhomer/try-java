@@ -12,6 +12,8 @@
 
   <properties>
     <jacoco.argLine/>
+    <try/>
+    <logback.debug>false</logback.debug>
   </properties>
 
   <build>
@@ -28,16 +30,17 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>com.purplepip.java8.TryStream</mainClass>
+          <mainClass>com.purplepip.trial.Trial</mainClass>
+          <arguments>
+            <argument>com.purplepip.java8.TryStream</argument>
+            <argument>${try}</argument>
+          </arguments>
           <systemProperties>
             <systemProperty>
               <key>logback.debug</key>
-              <value>true</value>
+              <value>${logback.debug}</value>
             </systemProperty>
           </systemProperties>
-          <arguments>
-            <argument>-Dlogback.debug=true</argument>
-          </arguments>
         </configuration>
       </plugin>
     </plugins>

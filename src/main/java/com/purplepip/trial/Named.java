@@ -13,25 +13,8 @@
  * limitations under the License.
  */
 
-package com.purplepip.java8;
+package com.purplepip.trial;
 
-import com.purplepip.trial.Named;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.Accessors;
-
-@Accessors(fluent = true)
-@ToString
-public class Song implements Named {
-  @Getter
-  @Setter
-  private String name;
-  @Getter
-  @Setter
-  private int length;
-
-  public Song copy() {
-    return new Song().name(name).length(length);
-  }
+public interface Named {
+  String name();
 }

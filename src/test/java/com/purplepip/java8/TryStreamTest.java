@@ -17,16 +17,12 @@ package com.purplepip.java8;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Iterator;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 @Slf4j
 public class TryStreamTest {
-  @Test
-  public void testTry() {
-    TryStream.main(new String[0]);
-  }
-
   @Test
   public void testReduce() {
     new TryStream().tryReduce();
@@ -40,5 +36,11 @@ public class TryStreamTest {
   @Test
   public void testLaziness() {
     assertTrue(new TryStream().tryLaziness() > 1);
+  }
+
+  @Test
+  public void testIterator() {
+    Iterator<Song> iterator = new TryStream().tryIterator();
+    assertTrue(iterator.hasNext());
   }
 }

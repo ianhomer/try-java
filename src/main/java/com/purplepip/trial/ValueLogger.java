@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.purplepip.java8;
+package com.purplepip.trial;
 
 import java.util.stream.Stream;
 import org.slf4j.Logger;

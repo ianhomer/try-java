@@ -15,9 +15,10 @@
 
 package com.purplepip.java8;
 
+import com.purplepip.trial.ValueLogger;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 public class TryStream {
@@ -28,34 +29,20 @@ public class TryStream {
       new Song().name("riff1").length(3),
       new Song().name("riff2").length(4)
   );
-  private static ValueLogger LOGGER = new ValueLogger(TryStream.class);
-
-  /**
-   * Try main.
-   *
-   * @param args arguments
-   */
-  public static void main(String[] args) {
-    Thread.currentThread().setName("main()");
-    LOGGER.child("filter").info(new TryStream().tryFilter());
-    LOGGER.child("map").info(new TryStream().tryMap());
-    LOGGER.child("sum").info(new TryStream().trySum());
-    LOGGER.child("laziness").info(new TryStream().tryLaziness());
-    LOGGER.child("reduce").info(new TryStream().tryReduce().orElse(null));
-  }
 
   /**
    * Filter out only songs that start with the word song.
    */
   public Stream<Song> tryFilter() {
-    return names.stream().filter(s -> s.name().startsWith("song"));
+    return names.stream()
+        .filter(s -> s.name().startsWith("song"));
   }
 
   /**
    * Demonstrate that intermediate operations do not get executed until necessary.
    */
   public long tryLaziness() {
-    ValueLogger logger = LOGGER.child("laziness");
+    ValueLogger logger = new ValueLogger(TryStream.class).child("laziness");
     return names.stream()
         .peek(logger.child("peek1")::info)
         .filter(s -> {
@@ -75,16 +62,27 @@ public class TryStream {
    * Map songs into stream of songs with new name.
    */
   public Stream<Song> tryMap() {
-    return names.stream().map(s -> s.copy().name("new-" + s.name()));
+    return names.stream()
+        .map(s -> s.copy().name("new-" + s.name()));
+  }
+
+  /**
+   * Stream iterator.
+   */
+  public Iterator<Song> tryIterator() {
+    return names.stream()
+        .filter(s -> s.name().startsWith("song"))
+        .iterator();
   }
 
   /**
    * Reduce stream of songs into one song.
    */
-  public Optional<Song> tryReduce() {
-    return names.stream().reduce((x, y) ->
-        new Song().name(x.name() + ":" + y.name()).length(x.length() + y.length())
-    );
+  public Song tryReduce() {
+    return names.stream()
+        .reduce((x, y) ->
+          new Song().name(x.name() + ":" + y.name()).length(x.length() + y.length())
+    ).orElseThrow(IllegalStateException::new);
   }
 
   /**
