@@ -17,13 +17,14 @@ package com.purplepip.java8;
 
 import com.purplepip.trial.ValueLogger;
 import java.util.Arrays;
+import java.util.IntSummaryStatistics;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TryStream {
-  private List<Song> names = Arrays.asList(
+  private List<Song> songs = Arrays.asList(
       new Song().name("song1").length(5),
       new Song().name("song2").length(10),
       new Song().name("song22").length(15),
@@ -32,35 +33,43 @@ public class TryStream {
   );
 
   public boolean tryAllMatch() {
-    return names.stream()
+    return songs.stream()
         .allMatch(s -> s.name().startsWith("song"));
   }
 
   public boolean tryAnyMatch() {
-    return names.stream()
+    return songs.stream()
         .anyMatch(s -> s.name().startsWith("song"));
   }
 
   public List<Object> tryCollect() {
-    return names.stream().filter(s -> s.name().startsWith("song"))
+    return songs.stream()
+        .filter(s -> s.name().startsWith("song"))
         .collect(Collectors.toList());
   }
 
   public String tryCollectJoining() {
-    return names.stream().map(Song::name)
+    return songs.stream()
+        .map(Song::name)
         .collect(Collectors.joining());
   }
 
   public String tryCollectJoiningCustom() {
-    return names.stream().map(s -> "  <li>" + s.name() + "</li>")
+    return songs.stream()
+        .map(s -> "  <li>" + s.name() + "</li>")
         .collect(Collectors.joining("\n", "\n<ul>\n", "\n</ul>"));
+  }
+
+  public IntSummaryStatistics tryCollectSummarizingDouble() {
+    return songs.stream()
+        .collect(Collectors.summarizingInt(Song::length));
   }
 
   /**
    * Filter out only songs that start with the word song.
    */
   public Stream<Song> tryFilter() {
-    return names.stream()
+    return songs.stream()
         .filter(s -> s.name().startsWith("song"));
   }
 
@@ -68,7 +77,7 @@ public class TryStream {
    * Stream iterator.
    */
   public Iterator<Song> tryIterator() {
-    return names.stream()
+    return songs.stream()
         .filter(s -> s.name().startsWith("song"))
         .iterator();
   }
@@ -78,7 +87,7 @@ public class TryStream {
    */
   public long tryLaziness() {
     ValueLogger logger = new ValueLogger(TryStream.class).child("laziness");
-    return names.stream()
+    return songs.stream()
         .peek(logger.child("peek1")::info)
         .filter(s -> {
           logger.child("filter1").info(s.name());
@@ -97,7 +106,7 @@ public class TryStream {
    * Map songs into stream of songs with new name.
    */
   public Stream<Song> tryMap() {
-    return names.stream()
+    return songs.stream()
         .map(s -> s.copy().name("new-" + s.name()));
   }
 
@@ -105,7 +114,7 @@ public class TryStream {
    * Reduce stream of songs into one song.
    */
   public Song tryReduce() {
-    return names.stream()
+    return songs.stream()
         .reduce((x, y) ->
             new Song().name(x.name() + ":" + y.name()).length(x.length() + y.length())
         ).orElseThrow(IllegalStateException::new);
@@ -115,6 +124,8 @@ public class TryStream {
    * Sum up all the lengths.
    */
   public int trySum() {
-    return names.stream().mapToInt(Song::length).sum();
+    return songs.stream()
+        .mapToInt(Song::length)
+        .sum();
   }
 }
