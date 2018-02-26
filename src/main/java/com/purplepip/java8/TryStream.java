@@ -19,6 +19,7 @@ import com.purplepip.trial.ValueLogger;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TryStream {
@@ -29,6 +30,31 @@ public class TryStream {
       new Song().name("riff1").length(3),
       new Song().name("riff2").length(4)
   );
+
+  public boolean tryAllMatch() {
+    return names.stream()
+        .allMatch(s -> s.name().startsWith("song"));
+  }
+
+  public boolean tryAnyMatch() {
+    return names.stream()
+        .anyMatch(s -> s.name().startsWith("song"));
+  }
+
+  public List<Object> tryCollect() {
+    return names.stream().filter(s -> s.name().startsWith("song"))
+        .collect(Collectors.toList());
+  }
+
+  public String tryCollectJoining() {
+    return names.stream().map(Song::name)
+        .collect(Collectors.joining());
+  }
+
+  public String tryCollectJoiningCustom() {
+    return names.stream().map(s -> "  <li>" + s.name() + "</li>")
+        .collect(Collectors.joining("\n", "\n<ul>\n", "\n</ul>"));
+  }
 
   /**
    * Filter out only songs that start with the word song.
