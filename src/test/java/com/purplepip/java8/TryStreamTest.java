@@ -15,6 +15,8 @@
 
 package com.purplepip.java8;
 
+import static org.junit.Assert.assertTrue;
+
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -28,5 +30,15 @@ public class TryStreamTest {
   @Test
   public void testReduce() {
     new TryStream().tryReduce();
+  }
+
+  @Test
+  public void testSum() {
+    assertTrue(new TryStream().trySum() > 10);
+  }
+
+  @Test
+  public void testLaziness() {
+    assertTrue(new TryStream().tryLaziness() > 1);
   }
 }
