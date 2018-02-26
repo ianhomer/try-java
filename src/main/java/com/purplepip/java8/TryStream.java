@@ -42,18 +42,33 @@ public class TryStream {
         .anyMatch(s -> s.name().startsWith("song"));
   }
 
+  /**
+   * Try collect.
+   *
+   * @return list
+   */
   public List<Object> tryCollect() {
     return songs.stream()
         .filter(s -> s.name().startsWith("song"))
         .collect(Collectors.toList());
   }
 
+  /**
+   * Try joining collect.
+   *
+   * @return list
+   */
   public String tryCollectJoining() {
     return songs.stream()
         .map(Song::name)
         .collect(Collectors.joining());
   }
 
+  /**
+   * Try custom joining collect.
+   *
+   * @return list
+   */
   public String tryCollectJoiningCustom() {
     return songs.stream()
         .map(s -> "  <li>" + s.name() + "</li>")

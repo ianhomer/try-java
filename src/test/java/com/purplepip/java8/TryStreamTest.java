@@ -17,12 +17,20 @@ package com.purplepip.java8;
 
 import static org.junit.Assert.assertTrue;
 
+import com.purplepip.trial.Trial;
 import java.util.Iterator;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 @Slf4j
 public class TryStreamTest {
+  @Test
+  public void testWithTrial() {
+    Trial trial = new Trial(TryStream.class);
+    trial.run();
+    assertTrue(trial.getExecutionCount() > 10);
+  }
+
   @Test
   public void testReduce() {
     new TryStream().tryReduce();
@@ -31,11 +39,6 @@ public class TryStreamTest {
   @Test
   public void testSum() {
     assertTrue(new TryStream().trySum() > 10);
-  }
-
-  @Test
-  public void testLaziness() {
-    assertTrue(new TryStream().tryLaziness() > 1);
   }
 
   @Test
