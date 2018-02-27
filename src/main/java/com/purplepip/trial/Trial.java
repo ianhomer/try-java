@@ -44,6 +44,9 @@ public class Trial {
     Stream.of(args[0].split(",")).forEach(className -> {
       try {
         Trial trial = new Trial(Class.forName(className));
+        /*
+         * Set the filter.
+         */
         if (args.length > 1 && args[1] != null) {
           trial.filter(args[1]);
         }

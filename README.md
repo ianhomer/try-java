@@ -1,6 +1,6 @@
 # Java 8 Exercise
 
-Java 8 exercises.
+Exercise to help learn and demonstrate new features in Java 8.
 
 # Command line execution
 
