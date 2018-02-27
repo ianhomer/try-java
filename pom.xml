@@ -32,7 +32,7 @@
         <configuration>
           <mainClass>com.purplepip.trial.Trial</mainClass>
           <arguments>
-            <argument>com.purplepip.java8.TryStream</argument>
+            <argument>com.purplepip.java8.TryStream,com.purplepip.java8.TryTime</argument>
             <argument>${try}</argument>
           </arguments>
           <systemProperties>

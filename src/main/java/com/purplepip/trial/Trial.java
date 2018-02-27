@@ -18,6 +18,7 @@ package com.purplepip.trial;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -29,22 +30,25 @@ public class Trial {
   /**
    * Main execution.
    *
-   * @param args command line arguments
+   * @param args command line arguments, first argument is class name, second argument is
+   *             method name filter.
    */
   public static void main(String[] args) {
     Thread.currentThread().setName("main()");
     if (args.length == 0) {
       throw new IllegalStateException("Trial arguments MUST specify a class name");
     }
-    try {
-      Trial trial = new Trial(Class.forName(args[0]));
-      if (args.length > 1) {
-        trial.filter(args[1]);
+    Stream.of(args[0].split(",")).forEach(className -> {
+      try {
+        Trial trial = new Trial(Class.forName(className));
+        if (args.length > 1 && args[1] != null) {
+          trial.filter(args[1]);
+        }
+        trial.run();
+      } catch (ClassNotFoundException e) {
+        LOG.error("Cannot find class " + className, e);
       }
-      trial.run();
-    } catch (ClassNotFoundException e) {
-      LOG.error("Cannot find class " + args[0], e);
-    }
+    });
   }
 
   /**
