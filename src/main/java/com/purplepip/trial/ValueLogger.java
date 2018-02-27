@@ -54,15 +54,9 @@ public class ValueLogger {
   public void info(Object value) {
     if (value instanceof Stream) {
       info((Stream) value);
-    } else if (value instanceof Named) {
-      info((Named) value);
     } else {
       log.info("{} : {} ", prefix, value);
     }
-  }
-
-  public void info(Named value) {
-    log.info("{} : {} ", prefix, value.name());
   }
 
   public void info(Stream<?> stream) {

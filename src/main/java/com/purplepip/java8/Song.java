@@ -15,7 +15,6 @@
 
 package com.purplepip.java8;
 
-import com.purplepip.trial.Named;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +28,7 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 @ToString(of = "name")
 @EqualsAndHashCode(of = "name")
-public class Song implements Named, Comparable<Song> {
+public class Song implements Comparable<Song> {
   @Getter
   @Setter
   private String name;

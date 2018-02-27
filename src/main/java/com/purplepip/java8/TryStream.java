@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -97,12 +96,12 @@ public class TryStream {
         .filter(s -> s.name().startsWith("song"));
   }
 
-  public Optional<Song> tryFindFirst() {
-    return songs.stream().findFirst();
+  public Song tryFindFirst() {
+    return songs.stream().findFirst().orElseThrow(IllegalStateException::new);
   }
 
-  public Optional<Song> tryFindAny() {
-    return songs.stream().findAny();
+  public Song tryFindAny() {
+    return songs.stream().findAny().orElseThrow(IllegalStateException::new);
   }
 
   public Stream<String> tryFlatMap() {
