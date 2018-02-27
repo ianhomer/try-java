@@ -30,6 +30,7 @@ public class TryStream {
       new Song().name("song1").length(5).labels("punk", "rock"),
       new Song().name("song1").length(5),
       new Song().name("song2").length(10).labels("rap"),
+      new Song().name("song3").length(7).labels("soul"),
       new Song().name("song22").length(15),
       new Song().name("riff1").length(3),
       new Song().name("riff2").length(4)
@@ -128,7 +129,7 @@ public class TryStream {
   /**
    * Demonstrate that intermediate operations do not get executed until necessary.
    */
-  public long tryLaziness() {
+  public long tryLazinessWithPeeks() {
     ValueLogger logger = new ValueLogger(TryStream.class).child("laziness");
     return songs.stream()
         .peek(logger.child("peek1")::info)
@@ -153,6 +154,18 @@ public class TryStream {
         .map(s -> s.copy().name("new-" + s.name()));
   }
 
+  public int tryMax() {
+    return songs.stream().mapToInt(Song::length).max().orElse(-1);
+  }
+
+  public int tryMin() {
+    return songs.stream().mapToInt(Song::length).min().orElse(-1);
+  }
+
+  public boolean tryNoneMatch() {
+    return songs.stream().noneMatch(s -> s.name().startsWith("poem"));
+  }
+
   /**
    * Reduce stream of songs into one song.
    */
@@ -161,6 +174,14 @@ public class TryStream {
         .reduce((x, y) ->
             new Song().name(x.name() + ":" + y.name()).length(x.length() + y.length())
         ).orElseThrow(IllegalStateException::new);
+  }
+
+  public Stream<Song> trySkip() {
+    return songs.stream().skip(2);
+  }
+
+  public Stream<Song> trySorted() {
+    return songs.stream().sorted();
   }
 
   /**

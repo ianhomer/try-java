@@ -8,6 +8,6 @@ Run all trials
 
     mvn exec:java
 
-Or just matching one
+Or just matching ones
     
     mvn exec:java -Dtry=laziness

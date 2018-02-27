@@ -29,7 +29,7 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 @ToString(of = "name")
 @EqualsAndHashCode(of = "name")
-public class Song implements Named {
+public class Song implements Named, Comparable<Song> {
   @Getter
   @Setter
   private String name;
@@ -38,6 +38,11 @@ public class Song implements Named {
   private int length;
 
   private List<String> labels = new ArrayList<>();
+
+  @Override
+  public int compareTo(Song o) {
+    return name.compareTo(o.name);
+  }
 
   public Song labels(String... labels) {
     this.labels.addAll(Arrays.asList(labels));
