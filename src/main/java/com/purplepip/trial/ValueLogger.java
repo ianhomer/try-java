@@ -52,7 +52,13 @@ public class ValueLogger {
    * @param value value to output
    */
   public void info(Object value) {
-    log.info("{} : {} ", prefix, value);
+    if (value instanceof Stream) {
+      info((Stream) value);
+    } else if (value instanceof Named) {
+      info((Named) value);
+    } else {
+      log.info("{} : {} ", prefix, value);
+    }
   }
 
   public void info(Named value) {

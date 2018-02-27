@@ -20,13 +20,16 @@ import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TryStream {
   private List<Song> songs = Arrays.asList(
+      new Song().name("song1").length(5).labels("punk", "rock"),
       new Song().name("song1").length(5),
-      new Song().name("song2").length(10),
+      new Song().name("song2").length(10).labels("rap"),
       new Song().name("song22").length(15),
       new Song().name("riff1").length(3),
       new Song().name("riff2").length(4)
@@ -44,8 +47,6 @@ public class TryStream {
 
   /**
    * Try collect.
-   *
-   * @return list
    */
   public List<Object> tryCollect() {
     return songs.stream()
@@ -55,8 +56,6 @@ public class TryStream {
 
   /**
    * Try joining collect.
-   *
-   * @return list
    */
   public String tryCollectJoining() {
     return songs.stream()
@@ -66,8 +65,6 @@ public class TryStream {
 
   /**
    * Try custom joining collect.
-   *
-   * @return list
    */
   public String tryCollectJoiningCustom() {
     return songs.stream()
@@ -80,12 +77,43 @@ public class TryStream {
         .collect(Collectors.summarizingInt(Song::length));
   }
 
+  public Stream<Song> tryConcat() {
+    return Stream.concat(songs.stream(), songs.stream());
+  }
+
+  /**
+   * Return stream of distinct objects.
+   */
+  public Stream<Song> tryDistinct() {
+    return songs.stream().distinct();
+  }
+
   /**
    * Filter out only songs that start with the word song.
    */
   public Stream<Song> tryFilter() {
     return songs.stream()
         .filter(s -> s.name().startsWith("song"));
+  }
+
+  public Optional<Song> tryFindFirst() {
+    return songs.stream().findFirst();
+  }
+
+  public Optional<Song> tryFindAny() {
+    return songs.stream().findAny();
+  }
+
+  public Stream<String> tryFlatMap() {
+    return songs.stream().flatMap(Song::labels);
+  }
+
+  public Stream<?> tryGenerate() {
+    return Stream.generate(new Random()::nextInt).limit(10);
+  }
+
+  public Stream<?> tryIterate() {
+    return Stream.iterate(2L, n -> n * 2).limit(10);
   }
 
   /**

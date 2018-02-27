@@ -16,13 +16,19 @@
 package com.purplepip.java8;
 
 import com.purplepip.trial.Named;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
 @Accessors(fluent = true)
-@ToString
+@ToString(of = "name")
+@EqualsAndHashCode(of = "name")
 public class Song implements Named {
   @Getter
   @Setter
@@ -30,6 +36,17 @@ public class Song implements Named {
   @Getter
   @Setter
   private int length;
+
+  private List<String> labels = new ArrayList<>();
+
+  public Song labels(String... labels) {
+    this.labels.addAll(Arrays.asList(labels));
+    return this;
+  }
+
+  public Stream<String> labels() {
+    return labels.stream();
+  }
 
   public Song copy() {
     return new Song().name(name).length(length);
