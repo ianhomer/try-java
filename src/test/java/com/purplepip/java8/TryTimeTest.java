@@ -15,14 +15,15 @@
 
 package com.purplepip.java8;
 
-import static junit.framework.TestCase.assertTrue;
-
-import java.time.LocalTime;
+import com.purplepip.trial.Trial;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class TryTimeTest {
   @Test
-  public void tryLater() {
-    assertTrue(new TryTime().tryLater().compareTo(LocalTime.now()) < 0);
+  public void testWithTrial() {
+    Trial trial = new Trial(TryTime.class);
+    trial.run();
+    Assert.assertTrue(trial.getExecutionCount() > 1);
   }
 }

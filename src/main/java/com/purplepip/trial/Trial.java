@@ -30,14 +30,17 @@ public class Trial {
   /**
    * Main execution.
    *
-   * @param args command line arguments, first argument is class name, second argument is
-   *             method name filter.
+   * @param args command line arguments, first argument is class pattern, second argument is
+   *             method name pattern.
    */
   public static void main(String[] args) {
     Thread.currentThread().setName("main()");
     if (args.length == 0) {
       throw new IllegalStateException("Trial arguments MUST specify a class name");
     }
+    /*
+     * Loop over class name and execute each as a trial.
+     */
     Stream.of(args[0].split(",")).forEach(className -> {
       try {
         Trial trial = new Trial(Class.forName(className));
@@ -60,9 +63,8 @@ public class Trial {
     this.clazz = clazz;
   }
 
-  public Trial filter(String filter) {
+  private void filter(String filter) {
     this.filter = filter.toLowerCase();
-    return this;
   }
 
   /**
@@ -71,6 +73,7 @@ public class Trial {
   public void run() {
     ValueLogger logger = new ValueLogger(clazz);
     Arrays.stream(clazz.getMethods())
+        // Trial methods start with "try"
         .filter(method -> method.getName().startsWith("try")
           && (filter == null || method.getName().toLowerCase().contains(filter)))
         .forEach(method -> {
