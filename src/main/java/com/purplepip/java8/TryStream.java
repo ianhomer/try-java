@@ -28,7 +28,7 @@ public class TryStream {
   private List<Song> songs = Arrays.asList(
       new Song().name("song1").length(5).labels("punk", "rock"),
       new Song().name("song1").length(5),
-      new Song().name("song2").length(10).labels("rap"),
+      new Song().name("song2").length(10).labels("rap", "punk"),
       new Song().name("song3").length(7).labels("soul"),
       new Song().name("song22").length(15),
       new Song().name("riff1").length(3),
@@ -37,12 +37,12 @@ public class TryStream {
 
   public boolean tryAllMatch() {
     return songs.stream()
-        .allMatch(s -> s.name().startsWith("song"));
+        .allMatch(song -> song.name().startsWith("song"));
   }
 
   public boolean tryAnyMatch() {
     return songs.stream()
-        .anyMatch(s -> s.name().startsWith("song"));
+        .anyMatch(song -> song.name().startsWith("song"));
   }
 
   /**
@@ -50,7 +50,7 @@ public class TryStream {
    */
   public List<Object> tryCollect() {
     return songs.stream()
-        .filter(s -> s.name().startsWith("song"))
+        .filter(song -> song.name().startsWith("song"))
         .collect(Collectors.toList());
   }
 
@@ -68,7 +68,7 @@ public class TryStream {
    */
   public String tryCollectJoiningCustom() {
     return songs.stream()
-        .map(s -> "  <li>" + s.name() + "</li>")
+        .map(song -> "  <li>" + song.name() + "</li>")
         .collect(Collectors.joining("\n", "\n<ul>\n", "\n</ul>"));
   }
 
@@ -96,32 +96,57 @@ public class TryStream {
         .filter(s -> s.name().startsWith("song"));
   }
 
+  /**
+   * Find first.
+   */
   public Song tryFindFirst() {
-    return songs.stream().findFirst().orElseThrow(IllegalStateException::new);
-  }
-
-  public Song tryFindAny() {
-    return songs.stream().findAny().orElseThrow(IllegalStateException::new);
-  }
-
-  public Stream<String> tryFlatMap() {
-    return songs.stream().flatMap(Song::labels);
-  }
-
-  public Stream<?> tryGenerate() {
-    return Stream.generate(new Random()::nextInt).limit(10);
-  }
-
-  public Stream<?> tryIterate() {
-    return Stream.iterate(2L, n -> n * 2).limit(10);
+    return songs.stream()
+        .findFirst()
+        .orElseThrow(IllegalStateException::new);
   }
 
   /**
-   * Stream iterator.
+   * Find any.
+   */
+  public Song tryFindAny() {
+    return songs.stream()
+        .findAny()
+        .orElseThrow(IllegalStateException::new);
+  }
+
+  /**
+   * Find all labels used in all songs.
+   */
+  public Stream<String> tryFlatMap() {
+    return songs.stream()
+        .flatMap(Song::labels)
+        .distinct();
+  }
+
+  /**
+   * Generate a stream of 10 random integers.
+   */
+  public Stream<?> tryGenerate() {
+    return Stream
+        .generate(new Random()::nextInt)
+        .limit(10);
+  }
+
+  /**
+   * Create a stream of the first 10 numbers in a series.
+   */
+  public Stream<?> tryIterate() {
+    return Stream
+        .iterate(2L, n -> n * 2)
+        .limit(10);
+  }
+
+  /**
+   * Get the iterator for a stream.
    */
   public Iterator<Song> tryIterator() {
     return songs.stream()
-        .filter(s -> s.name().startsWith("song"))
+        .filter(song -> song.name().startsWith("song"))
         .iterator();
   }
 
@@ -132,15 +157,9 @@ public class TryStream {
     ValueLogger logger = new ValueLogger(TryStream.class).child("laziness");
     return songs.stream()
         .peek(logger.child("peek1")::info)
-        .filter(s -> {
-          logger.child("filter1").info(s.name());
-          return s.name().startsWith("song");
-        })
+        .filter(song -> song.name().startsWith("song"))
         .peek(logger.child("peek3")::info)
-        .filter(s -> {
-          logger.child("filter2").info(s.name());
-          return s.name().endsWith("2");
-        })
+        .filter(song -> song.name().endsWith("2"))
         .peek(logger.child("peek3")::info)
         .count();
   }
@@ -150,19 +169,30 @@ public class TryStream {
    */
   public Stream<Song> tryMap() {
     return songs.stream()
-        .map(s -> s.copy().name("new-" + s.name()));
+        .map(song -> song.copy().name("new-" + song.name()));
   }
 
+  /**
+   * Get maximum song length.
+   */
   public int tryMax() {
-    return songs.stream().mapToInt(Song::length).max().orElse(-1);
+    return songs.stream()
+        .mapToInt(Song::length).max()
+        .orElse(-1);
   }
 
+  /**
+   * Get minimum song length.
+   */
   public int tryMin() {
-    return songs.stream().mapToInt(Song::length).min().orElse(-1);
+    return songs.stream()
+        .mapToInt(Song::length).min()
+        .orElse(-1);
   }
 
   public boolean tryNoneMatch() {
-    return songs.stream().noneMatch(s -> s.name().startsWith("poem"));
+    return songs.stream()
+        .noneMatch(s -> s.name().startsWith("poem"));
   }
 
   /**
@@ -176,11 +206,13 @@ public class TryStream {
   }
 
   public Stream<Song> trySkip() {
-    return songs.stream().skip(2);
+    return songs.stream()
+        .skip(2);
   }
 
   public Stream<Song> trySorted() {
-    return songs.stream().sorted();
+    return songs.stream()
+        .sorted();
   }
 
   /**
