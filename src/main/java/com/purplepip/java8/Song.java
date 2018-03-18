@@ -17,7 +17,9 @@ package com.purplepip.java8;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,9 +34,15 @@ public class Song implements Comparable<Song> {
   @Getter
   @Setter
   private String name;
+
   @Getter
   @Setter
   private int length;
+
+  @Getter
+  private Genre primaryGenre;
+
+  private Set<Genre> genres = new HashSet<>();
 
   private List<String> labels = new ArrayList<>();
 
@@ -50,6 +58,24 @@ public class Song implements Comparable<Song> {
 
   public Stream<String> labels() {
     return labels.stream();
+  }
+
+  /**
+   * Set genres.
+   *
+   * @param genres genres to set
+   * @return this song
+   */
+  public Song genres(Genre... genres) {
+    if (primaryGenre == null || genres.length > 0) {
+      primaryGenre = genres[0];
+    }
+    this.genres.addAll(Arrays.asList(genres));
+    return this;
+  }
+
+  public Stream<Genre> genres() {
+    return genres.stream();
   }
 
   public Song copy() {

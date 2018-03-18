@@ -13,11 +13,10 @@
  * limitations under the License.
  */
 
-package com.purplepip.java8;
+package com.purplepip.trial;
 
 import static org.junit.Assert.assertEquals;
 
-import com.purplepip.trial.Trial;
 import org.junit.Test;
 
 public class TrialTest {
@@ -30,7 +29,7 @@ public class TrialTest {
 
   @Test
   public void testMain() {
-    Trial.main(new String[] {"com.purplepip.java8.TrialTest$TrySomething"});
+    Trial.main(new String[] {"com.purplepip.trial.TrialTest$TrySomething"});
   }
 
   public static class TrySomething {
