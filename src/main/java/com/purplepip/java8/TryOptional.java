@@ -23,6 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class TryOptional {
+  private static final String NO_SONG_MESSAGE = "why no song?";
+
   public void tryCaseReturn() {
     LOG.debug(getMessage(new Song().name("my-song").genres(PUNK, INDIE)));
     LOG.debug(getMessage(null));
@@ -34,7 +36,7 @@ public class TryOptional {
    * @return result of case statement
    */
   public String getMessage(Song song) {
-    return Optional.ofNullable(song).map(this::getMessageFromSong).orElse("why no song?");
+    return Optional.ofNullable(song).map(this::getMessageFromSong).orElse(NO_SONG_MESSAGE);
   }
 
   /**
@@ -44,7 +46,7 @@ public class TryOptional {
    * @return message
    */
   public String getMessageWithoutOptional(Song song) {
-    return song == null ? "why no song?" : getMessageFromSong(song);
+    return song == null ? NO_SONG_MESSAGE : getMessageFromSong(song);
   }
 
   private String getMessageFromSong(Song song) {
