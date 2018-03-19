@@ -30,7 +30,18 @@ public class TryFunctionTest {
   }
 
   @Test
-  public void testCaseReturn() {
+  public void tryFunction() {
+    assertEquals("faster, faster : faster, faster", new TryFunction().tryFunction());
+  }
+
+  @Test
+  public void tryInlineLambda() {
     assertEquals("faster, faster : faster, faster", new TryFunction().tryInlineLambda());
+  }
+
+  @Test
+  public void tryNonFunctionalAlternativeToInlineLambda() {
+    assertEquals("faster, faster : faster, faster", new TryFunction()
+        .tryNonFunctionalAlternativeToInlineLambda());
   }
 }

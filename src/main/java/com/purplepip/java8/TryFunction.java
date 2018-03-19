@@ -28,6 +28,24 @@ public class TryFunction {
    *
    * @return result
    */
+  public String tryFunction() {
+    Function<Song, String> function = s -> {
+      switch (s.primaryGenre()) {
+        case PUNK:
+          return "faster, faster";
+        default:
+          return "keep going";
+      }
+    };
+    String value = function.apply(song);
+    return value + " : " + value;
+  }
+
+  /**
+   * Inline lambda usage.
+   *
+   * @return result
+   */
   public String tryInlineLambda() {
     String value = ((Function<Song, String>) s -> {
         switch (s.primaryGenre()) {
@@ -38,6 +56,23 @@ public class TryFunction {
         }
       }
     ).apply(song);
+    return value + " : " + value;
+  }
+
+  /**
+   * Compare with non-functional usage.
+   *
+   * @return result
+   */
+  public String tryNonFunctionalAlternativeToInlineLambda() {
+    String value;
+    switch (song.primaryGenre()) {
+      case PUNK:
+        value = "faster, faster";
+        break;
+      default:
+        value = "keep going";
+    }
     return value + " : " + value;
   }
 }
