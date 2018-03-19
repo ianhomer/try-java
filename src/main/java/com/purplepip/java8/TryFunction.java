@@ -65,6 +65,10 @@ public class TryFunction {
    * @return result
    */
   public String tryNonFunctionalAlternativeToInlineLambda() {
+    /*
+     * The disadvantage of the non-functional approach is that there is no enforcement that
+     * value is set.   With more complex logic branches this could lead to hidden bugs.
+     */
     String value;
     switch (song.primaryGenre()) {
       case PUNK:
