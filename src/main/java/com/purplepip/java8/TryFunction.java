@@ -67,7 +67,8 @@ public class TryFunction {
   public String tryNonFunctionalAlternativeToInlineLambda() {
     /*
      * The disadvantage of the non-functional approach is that there is no enforcement that
-     * value is set.   With more complex logic branches this could lead to hidden bugs.
+     * value is set.   With more complex logic branches this could lead to hidden bugs.  This
+     * is because the logic relies on a side effect setting the result.
      */
     String value;
     switch (song.primaryGenre()) {
