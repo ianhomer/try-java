@@ -22,7 +22,7 @@ public enum SingletonEnum implements MySingleton {
 
   private long seed;
 
-  private SingletonEnum() {
+  SingletonEnum() {
     seed = new Random().nextLong();
   }
 
