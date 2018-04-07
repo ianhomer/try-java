@@ -13,11 +13,9 @@
  * limitations under the License.
  */
 
-package com.purplepip.java7;
+package com.purplepip.pattern;
 
 import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
 
 public class DoubleCheckedLockingSingletonTest {
 

@@ -13,19 +13,11 @@
  * limitations under the License.
  */
 
-package com.purplepip.java7;
+package com.purplepip.pattern;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;

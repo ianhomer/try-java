@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.purplepip.java7;
+package com.purplepip.pattern;
 
 public interface MySingleton {
   long getSeed();
