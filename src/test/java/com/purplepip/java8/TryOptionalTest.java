@@ -25,8 +25,7 @@ import org.junit.Test;
 public class TryOptionalTest {
   @Test
   public void testWithTrial() {
-    Trial trial = new Trial(TryOptional.class);
-    trial.run();
+    Trial trial = new Trial(TryOptional.class).run();
     Assert.assertTrue(trial.getExecutionCount() > 0);
   }
 

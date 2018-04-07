@@ -18,14 +18,14 @@ package com.purplepip.java8;
 import static org.junit.Assert.assertEquals;
 
 import com.purplepip.trial.Trial;
+import java.util.Optional;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class TryFunctionTest {
   @Test
   public void testWithTrial() {
-    Trial trial = new Trial(TryFunction.class);
-    trial.run();
+    Trial trial = new Trial(TryFunction.class).run();
     Assert.assertTrue(trial.getExecutionCount() > 0);
   }
 

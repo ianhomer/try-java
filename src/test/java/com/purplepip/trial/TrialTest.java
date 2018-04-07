@@ -22,8 +22,7 @@ import org.junit.Test;
 public class TrialTest {
   @Test
   public void testTrial() {
-    Trial trial = new Trial(TrySomething.class);
-    trial.run();
+    Trial trial = new Trial(TrySomething.class).run();
     assertEquals(1, trial.getExecutionCount());
   }
 

@@ -26,8 +26,7 @@ import org.junit.Test;
 public class TryStreamTest {
   @Test
   public void testWithTrial() {
-    Trial trial = new Trial(TryStream.class);
-    trial.run();
+    Trial trial = new Trial(TryStream.class).run();
     assertTrue(trial.getExecutionCount() > 10);
   }
 

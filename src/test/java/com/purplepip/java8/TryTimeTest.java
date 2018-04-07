@@ -22,8 +22,7 @@ import org.junit.Test;
 public class TryTimeTest {
   @Test
   public void testWithTrial() {
-    Trial trial = new Trial(TryTime.class);
-    trial.run();
+    Trial trial = new Trial(TryTime.class).run();
     Assert.assertTrue(trial.getExecutionCount() > 1);
   }
 }

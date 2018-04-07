@@ -73,7 +73,7 @@ public class Trial {
   /**
    * Run trial.
    */
-  public void run() {
+  public Trial run() {
     ValueLogger logger = new ValueLogger(clazz);
     Arrays.stream(clazz.getMethods())
         // Trial methods start with "try"
@@ -88,6 +88,7 @@ public class Trial {
             LOG.error("Cannot invoke " + method, e);
           }
         });
+    return this;
   }
 
   public int getExecutionCount() {
