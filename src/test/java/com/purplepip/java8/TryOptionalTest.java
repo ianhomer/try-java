@@ -16,19 +16,16 @@
 package com.purplepip.java8;
 
 import static com.purplepip.music.Genre.PUNK;
+import static com.purplepip.trial.TrialAssert.assertExecution;
 import static org.junit.Assert.assertEquals;
 
 import com.purplepip.music.Song;
-import com.purplepip.trial.Execution;
-import com.purplepip.trial.Trial;
-import org.junit.Assert;
 import org.junit.Test;
 
 public class TryOptionalTest {
   @Test
   public void testWithTrial() {
-    Execution execution = new Trial(TryOptional.class).run();
-    Assert.assertTrue(execution.getCount() > 0);
+    assertExecution(TryOptional.class);
   }
 
   @Test

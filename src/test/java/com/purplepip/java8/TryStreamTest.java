@@ -15,22 +15,19 @@
 
 package com.purplepip.java8;
 
+import static com.purplepip.trial.TrialAssert.assertExecution;
 import static org.junit.Assert.assertTrue;
 
 import com.purplepip.music.Song;
-import com.purplepip.trial.Execution;
-import com.purplepip.trial.Trial;
 import java.util.Iterator;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
 import org.junit.Test;
 
 @Slf4j
 public class TryStreamTest {
   @Test
   public void testWithTrial() {
-    Execution execution = new Trial(TryStream.class).run();
-    Assert.assertTrue(execution.getCount() > 0);
+    assertExecution(TryStream.class);
   }
 
   @Test

@@ -13,15 +13,13 @@
  * limitations under the License.
  */
 
-package com.purplepip.java9;
+package com.purplepip.trial;
 
-import static com.purplepip.trial.TrialAssert.assertExecution;
+import org.junit.Assert;
 
-import org.junit.Test;
-
-public class TryCollectionFactoryTest {
-  @Test
-  public void testWithTrial() {
-    assertExecution(TryCollectionFactory.class);
+public class TrialAssert {
+  public static void assertExecution(Class<?> clazz) {
+    Execution execution = new Trial(clazz).run();
+    Assert.assertTrue(execution.getCount() > 0);
   }
 }

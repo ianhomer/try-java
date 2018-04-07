@@ -15,7 +15,6 @@
 
 package com.purplepip.trial;
 
-import com.purplepip.java8.TryFunction;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -15,15 +15,13 @@
 
 package com.purplepip.java9;
 
-import com.purplepip.trial.Execution;
-import com.purplepip.trial.Trial;
-import org.junit.Assert;
+import static com.purplepip.trial.TrialAssert.assertExecution;
+
 import org.junit.Test;
 
 public class TryStream9Test {
   @Test
   public void testWithTrial() {
-    Execution execution = new Trial(TryStream9.class).run();
-    Assert.assertTrue(execution.getCount() > 0);
+    assertExecution(TryStream9.class);
   }
 }

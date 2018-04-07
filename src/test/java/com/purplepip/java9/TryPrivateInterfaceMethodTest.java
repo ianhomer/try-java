@@ -15,15 +15,13 @@
 
 package com.purplepip.java9;
 
-import com.purplepip.trial.Execution;
-import com.purplepip.trial.Trial;
-import org.junit.Assert;
+import static com.purplepip.trial.TrialAssert.assertExecution;
+
 import org.junit.Test;
 
 public class TryPrivateInterfaceMethodTest {
   @Test
   public void testWithTrial() {
-    Execution execution = new Trial(TryPrivateInterfaceMethod.class).run();
-    Assert.assertTrue(execution.getCount() > 0);
+    assertExecution(TryPrivateInterfaceMethod.class);
   }
 }

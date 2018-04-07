@@ -15,15 +15,13 @@
 
 package com.purplepip.java8;
 
-import com.purplepip.trial.Execution;
-import com.purplepip.trial.Trial;
-import org.junit.Assert;
+import static com.purplepip.trial.TrialAssert.assertExecution;
+
 import org.junit.Test;
 
 public class TryTimeTest {
   @Test
   public void testWithTrial() {
-    Execution execution = new Trial(TryTime.class).run();
-    Assert.assertTrue(execution.getCount() > 0);
+    assertExecution(TryTime.class);
   }
 }
