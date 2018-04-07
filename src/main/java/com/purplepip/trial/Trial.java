@@ -17,7 +17,6 @@ package com.purplepip.trial;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,6 +36,7 @@ public class Trial {
     if (args.length == 0) {
       throw new IllegalStateException("Trial arguments MUST specify a class name");
     }
+
     /*
      * Loop over class name and execute each as a trial.
      */
