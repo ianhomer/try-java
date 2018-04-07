@@ -13,19 +13,21 @@
  * limitations under the License.
  */
 
-package com.purplepip.pattern.prototype;
+package com.purplepip.music;
 
-import static org.junit.Assert.assertEquals;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 
-import com.purplepip.music.Genre;
-import com.purplepip.music.Song;
-import org.junit.Test;
+@Accessors(fluent = true)
+public class Note {
+  @Getter
+  private int number;
 
-public class PrototypeFactoryTest {
-  @Test
-  public void testPrototypeFactory() {
-    Song prototype = new Song().name("prototype").genres(Genre.PUNK, Genre.JAZZ);
-    MyPrototypeFactory<Song> factory = new SongFactory(prototype);
-    assertEquals(factory.make(), prototype);
+  @Getter
+  private long time;
+
+  public Note(int number, long time) {
+    this.number = number;
+    this.time = time;
   }
 }

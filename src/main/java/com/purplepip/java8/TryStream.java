@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 import java.util.Iterator;
 import java.util.List;
+import java.util.LongSummaryStatistics;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -73,9 +74,9 @@ public class TryStream {
         .collect(Collectors.joining("\n", "\n<ul>\n", "\n</ul>"));
   }
 
-  public IntSummaryStatistics tryCollectSummarizingDouble() {
+  public LongSummaryStatistics tryCollectSummarizingDouble() {
     return songs.stream()
-        .collect(Collectors.summarizingInt(Song::length));
+        .collect(Collectors.summarizingLong(Song::length));
   }
 
   public Stream<Song> tryConcat() {
@@ -176,19 +177,19 @@ public class TryStream {
   /**
    * Get maximum song length.
    */
-  public int tryMax() {
+  public long tryMax() {
     return songs.stream()
-        .mapToInt(Song::length).max()
-        .orElse(-1);
+        .mapToLong(Song::length).max()
+        .orElse(-1L);
   }
 
   /**
    * Get minimum song length.
    */
-  public int tryMin() {
+  public long tryMin() {
     return songs.stream()
-        .mapToInt(Song::length).min()
-        .orElse(-1);
+        .mapToLong(Song::length).min()
+        .orElse(-1L);
   }
 
   public boolean tryNoneMatch() {
@@ -219,9 +220,9 @@ public class TryStream {
   /**
    * Sum up all the lengths.
    */
-  public int trySum() {
+  public long trySum() {
     return songs.stream()
-        .mapToInt(Song::length)
+        .mapToLong(Song::length)
         .sum();
   }
 }

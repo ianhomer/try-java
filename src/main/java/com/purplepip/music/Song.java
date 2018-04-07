@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,6 +33,8 @@ import lombok.experimental.Accessors;
 @ToString(of = "name")
 @EqualsAndHashCode(of = "name")
 public class Song implements Comparable<Song> {
+  private AtomicInteger playCount = new AtomicInteger();
+
   /**
    * A copy constructor.
    *
@@ -52,7 +55,7 @@ public class Song implements Comparable<Song> {
 
   @Getter
   @Setter
-  private int length;
+  private long length;
 
   @Getter
   private Genre primaryGenre;
@@ -94,6 +97,14 @@ public class Song implements Comparable<Song> {
   }
 
   public Song copy() {
-    return new Song().name(name).length(length);
+    return new Song(this);
+  }
+
+  public void play() {
+    playCount.incrementAndGet();
+  }
+
+  public int getPlayCount() {
+    return playCount.get();
   }
 }

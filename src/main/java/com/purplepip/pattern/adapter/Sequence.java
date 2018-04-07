@@ -13,19 +13,31 @@
  * limitations under the License.
  */
 
-package com.purplepip.pattern.prototype;
+package com.purplepip.pattern.adapter;
 
-import static org.junit.Assert.assertEquals;
+import com.purplepip.music.Note;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
-import com.purplepip.music.Genre;
-import com.purplepip.music.Song;
-import org.junit.Test;
+public class Sequence {
+  HashSet<Note> notes = new HashSet<>();
+  private AtomicInteger startCount = new AtomicInteger();
 
-public class PrototypeFactoryTest {
-  @Test
-  public void testPrototypeFactory() {
-    Song prototype = new Song().name("prototype").genres(Genre.PUNK, Genre.JAZZ);
-    MyPrototypeFactory<Song> factory = new SongFactory(prototype);
-    assertEquals(factory.make(), prototype);
+  public Sequence(Set<Note> notes) {
+    this.notes.addAll(notes);
+  }
+
+  public Stream<Note> notes() {
+    return notes.stream();
+  }
+
+  public void start() {
+    startCount.incrementAndGet();
+  }
+
+  public int getStartCount() {
+    return startCount.get();
   }
 }
