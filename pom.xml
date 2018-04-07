@@ -7,8 +7,8 @@
     <version>1.0.7</version>
   </parent>
 
-  <artifactId>try-java8</artifactId>
-  <name>Try Java 8</name>
+  <artifactId>try-java</artifactId>
+  <name>Try Java</name>
   <version>1.0.0-SNAPSHOT</version>
 
   <properties>
