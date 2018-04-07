@@ -1,8 +1,8 @@
-# Java 8 Exercise
+# Java Exercise
 
-Exercise to help learn and demonstrate new features in Java 8.
+Exercise to help learn and demonstrate features in Java.
 
-# Command line execution
+# Run it
 
 Run all trials
 
