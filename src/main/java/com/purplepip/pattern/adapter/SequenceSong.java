@@ -19,6 +19,7 @@ import com.purplepip.music.Note;
 import com.purplepip.music.Song;
 import java.util.Comparator;
 import java.util.Objects;
+import javax.validation.constraints.NotNull;
 
 /**
  * Adapter from a sequence to a song.
@@ -32,7 +33,7 @@ public class SequenceSong extends Song {
    * @param prototype prototype to base the song on
    * @param sequence sequence of notes
    */
-  public SequenceSong(Song prototype, Sequence sequence) {
+  public SequenceSong(Song prototype, @NotNull Sequence sequence) {
     super(prototype);
     Objects.requireNonNull(sequence, "Sequence must not be null");
     this.sequence = sequence;
