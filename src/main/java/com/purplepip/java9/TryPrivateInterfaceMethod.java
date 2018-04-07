@@ -23,6 +23,7 @@ public class TryPrivateInterfaceMethod {
     return List.of(o.getRunMessage(), o.getWalkMessage());
   }
 
+  @FunctionalInterface
   public interface MyInterface {
     String getName();
 
