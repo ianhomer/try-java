@@ -13,8 +13,21 @@
  * limitations under the License.
  */
 
-package com.purplepip.java8;
+package com.purplepip.pattern.prototype;
 
-public enum Genre {
-  ELECTRONICA, INDIE, JAZZ, FUNK, GRIME, PUNK, RAP
+import static org.junit.Assert.assertEquals;
+
+import com.purplepip.music.Genre;
+import com.purplepip.music.Song;
+import com.purplepip.pattern.prototype.MyPrototypeFactory;
+import com.purplepip.pattern.prototype.SongFactory;
+import org.junit.Test;
+
+public class PrototypeFactoryTest {
+  @Test
+  public void testPrototypeFactory() {
+    Song prototype = new Song().name("prototype").genres(Genre.PUNK, Genre.JAZZ);
+    MyPrototypeFactory<Song> factory = new SongFactory(prototype);
+    assertEquals(factory.make(), prototype);
+  }
 }

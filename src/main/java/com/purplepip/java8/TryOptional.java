@@ -15,9 +15,10 @@
 
 package com.purplepip.java8;
 
-import static com.purplepip.java8.Genre.INDIE;
-import static com.purplepip.java8.Genre.PUNK;
+import static com.purplepip.music.Genre.INDIE;
+import static com.purplepip.music.Genre.PUNK;
 
+import com.purplepip.music.Song;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 

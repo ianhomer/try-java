@@ -13,10 +13,13 @@
  * limitations under the License.
  */
 
-package com.purplepip.pattern;
+package com.purplepip.pattern.singleton;
 
 import static org.junit.Assert.assertEquals;
 
+import com.purplepip.pattern.singleton.DoubleCheckedLockingSingleton;
+import com.purplepip.pattern.singleton.MySingleton;
+import com.purplepip.pattern.singleton.SingletonEnum;
 import java.util.function.Supplier;
 import org.assertj.core.util.Lists;
 import org.junit.Test;

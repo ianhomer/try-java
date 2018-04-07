@@ -13,10 +13,8 @@
  * limitations under the License.
  */
 
-package com.purplepip.pattern;
+package com.purplepip.music;
 
-import static org.junit.Assert.assertEquals;
-
-public class DoubleCheckedLockingSingletonTest {
-
+public enum Genre {
+  ELECTRONICA, INDIE, JAZZ, FUNK, GRIME, PUNK, RAP
 }

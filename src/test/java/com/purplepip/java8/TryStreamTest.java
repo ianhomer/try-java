@@ -17,6 +17,7 @@ package com.purplepip.java8;
 
 import static org.junit.Assert.assertTrue;
 
+import com.purplepip.music.Song;
 import com.purplepip.trial.Execution;
 import com.purplepip.trial.Trial;
 import java.util.Iterator;

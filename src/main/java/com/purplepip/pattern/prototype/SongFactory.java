@@ -13,8 +13,19 @@
  * limitations under the License.
  */
 
-package com.purplepip.pattern;
+package com.purplepip.pattern.prototype;
 
-public interface MySingleton {
-  long getSeed();
+import com.purplepip.music.Song;
+
+public class SongFactory implements MyPrototypeFactory<Song> {
+  private Song prototype;
+
+  public SongFactory(Song prototype) {
+    this.prototype = prototype;
+  }
+
+  @Override
+  public Song make() {
+    return new Song(prototype);
+  }
 }

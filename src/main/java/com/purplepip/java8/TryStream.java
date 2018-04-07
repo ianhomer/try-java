@@ -15,6 +15,7 @@
 
 package com.purplepip.java8;
 
+import com.purplepip.music.Song;
 import com.purplepip.trial.ValueLogger;
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
@@ -169,7 +170,7 @@ public class TryStream {
    */
   public Stream<Song> tryMap() {
     return songs.stream()
-        .map(song -> song.copy().name("new-" + song.name()));
+        .map(song -> new Song(song).name("new-" + song.name()));
   }
 
   /**

@@ -13,10 +13,11 @@
  * limitations under the License.
  */
 
-package com.purplepip.java8;
+package com.purplepip.music;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +32,20 @@ import lombok.experimental.Accessors;
 @ToString(of = "name")
 @EqualsAndHashCode(of = "name")
 public class Song implements Comparable<Song> {
+  /**
+   * A copy constructor.
+   *
+   * @param song song to copy
+   */
+  public Song(Song song) {
+    name(song.name());
+    length(song.length());
+    genres(song.genres.toArray(new Genre[] {}));
+  }
+
+  public Song() {
+  }
+
   @Getter
   @Setter
   private String name;
@@ -67,7 +82,7 @@ public class Song implements Comparable<Song> {
    * @return this song
    */
   public Song genres(Genre... genres) {
-    if (primaryGenre == null || genres.length > 0) {
+    if (primaryGenre == null && genres.length > 0) {
       primaryGenre = genres[0];
     }
     this.genres.addAll(Arrays.asList(genres));

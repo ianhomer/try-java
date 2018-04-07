@@ -13,20 +13,8 @@
  * limitations under the License.
  */
 
-package com.purplepip.pattern;
+package com.purplepip.pattern.prototype;
 
-import java.util.Random;
-
-public enum SingletonEnum implements MySingleton {
-  INSTANCE;
-
-  private long seed;
-
-  SingletonEnum() {
-    seed = new Random().nextLong();
-  }
-
-  public long getSeed() {
-    return seed;
-  }
+public interface MyPrototypeFactory<T> {
+  T make();
 }

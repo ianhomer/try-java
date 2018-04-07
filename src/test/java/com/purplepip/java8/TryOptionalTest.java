@@ -15,9 +15,10 @@
 
 package com.purplepip.java8;
 
-import static com.purplepip.java8.Genre.PUNK;
+import static com.purplepip.music.Genre.PUNK;
 import static org.junit.Assert.assertEquals;
 
+import com.purplepip.music.Song;
 import com.purplepip.trial.Execution;
 import com.purplepip.trial.Trial;
 import org.junit.Assert;
