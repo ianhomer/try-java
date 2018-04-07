@@ -24,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Trial {
   private final Class<?> clazz;
-  private final AtomicInteger executionCount = new AtomicInteger();
   private String filter;
 
   /**
@@ -73,8 +72,9 @@ public class Trial {
   /**
    * Run trial.
    */
-  public Trial run() {
+  public Execution run() {
     ValueLogger logger = new ValueLogger(clazz);
+    final Execution execution = new Execution();
     Arrays.stream(clazz.getMethods())
         // Trial methods start with "try"
         .filter(method -> method.getName().startsWith("try")
@@ -83,15 +83,11 @@ public class Trial {
           try {
             Object result = method.invoke(method.getDeclaringClass().newInstance());
             logger.child(method.getName()).info(result);
-            executionCount.incrementAndGet();
+            execution.increment();
           } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
             LOG.error("Cannot invoke " + method, e);
           }
         });
-    return this;
-  }
-
-  public int getExecutionCount() {
-    return executionCount.get();
+    return execution;
   }
 }

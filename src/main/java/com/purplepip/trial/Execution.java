@@ -15,25 +15,17 @@
 
 package com.purplepip.trial;
 
-import com.purplepip.java8.TryFunction;
-import org.junit.Assert;
-import org.junit.Test;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class TrialTest {
-  @Test
-  public void testTrial() {
-    Execution execution = new Trial(TrySomething.class).run();
-    Assert.assertTrue(execution.getCount() > 0);
+public class Execution {
+  private final AtomicInteger count = new AtomicInteger();
+
+  public void increment() {
+    count.incrementAndGet();
   }
 
-  @Test
-  public void testMain() {
-    Trial.main(new String[] {"com.purplepip.trial.TrialTest$TrySomething"});
-  }
 
-  public static class TrySomething {
-    public String trySomething() {
-      return "something";
-    }
+  public int getCount() {
+    return count.get();
   }
 }

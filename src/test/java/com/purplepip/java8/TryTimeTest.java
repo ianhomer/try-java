@@ -15,6 +15,7 @@
 
 package com.purplepip.java8;
 
+import com.purplepip.trial.Execution;
 import com.purplepip.trial.Trial;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,7 +23,7 @@ import org.junit.Test;
 public class TryTimeTest {
   @Test
   public void testWithTrial() {
-    Trial trial = new Trial(TryTime.class).run();
-    Assert.assertTrue(trial.getExecutionCount() > 1);
+    Execution execution = new Trial(TryTime.class).run();
+    Assert.assertTrue(execution.getCount() > 0);
   }
 }

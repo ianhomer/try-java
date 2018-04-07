@@ -17,17 +17,19 @@ package com.purplepip.java8;
 
 import static org.junit.Assert.assertTrue;
 
+import com.purplepip.trial.Execution;
 import com.purplepip.trial.Trial;
 import java.util.Iterator;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Test;
 
 @Slf4j
 public class TryStreamTest {
   @Test
   public void testWithTrial() {
-    Trial trial = new Trial(TryStream.class).run();
-    assertTrue(trial.getExecutionCount() > 10);
+    Execution execution = new Trial(TryStream.class).run();
+    Assert.assertTrue(execution.getCount() > 0);
   }
 
   @Test

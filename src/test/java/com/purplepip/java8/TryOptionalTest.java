@@ -18,6 +18,7 @@ package com.purplepip.java8;
 import static com.purplepip.java8.Genre.PUNK;
 import static org.junit.Assert.assertEquals;
 
+import com.purplepip.trial.Execution;
 import com.purplepip.trial.Trial;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,8 +26,8 @@ import org.junit.Test;
 public class TryOptionalTest {
   @Test
   public void testWithTrial() {
-    Trial trial = new Trial(TryOptional.class).run();
-    Assert.assertTrue(trial.getExecutionCount() > 0);
+    Execution execution = new Trial(TryOptional.class).run();
+    Assert.assertTrue(execution.getCount() > 0);
   }
 
   @Test
