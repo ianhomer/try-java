@@ -12,6 +12,7 @@
   <version>1.0.0-SNAPSHOT</version>
 
   <properties>
+    <java.version>1.9</java.version>
     <jacoco.argLine/>
     <try/>
     <logback.debug>false</logback.debug>
