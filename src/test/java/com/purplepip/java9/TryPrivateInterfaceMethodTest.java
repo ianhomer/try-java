@@ -15,16 +15,15 @@
 
 package com.purplepip.java9;
 
-import java.util.Optional;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import com.purplepip.trial.Execution;
+import com.purplepip.trial.Trial;
+import org.junit.Assert;
+import org.junit.Test;
 
-public class TryStream9 {
-  public int[] tryIterate() {
-    return IntStream.iterate(1, i -> i < 5, i -> i + 1).toArray();
-  }
-
-  public Stream<Integer> tryOptionalStream() {
-    return Optional.of(1).stream();
+public class TryPrivateInterfaceMethodTest {
+  @Test
+  public void testWithTrial() {
+    Execution execution = new Trial(TryPrivateInterfaceMethod.class).run();
+    Assert.assertTrue(execution.getCount() > 0);
   }
 }

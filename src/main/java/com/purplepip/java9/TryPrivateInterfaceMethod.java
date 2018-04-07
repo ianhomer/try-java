@@ -15,16 +15,27 @@
 
 package com.purplepip.java9;
 
-import java.util.Optional;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.List;
 
-public class TryStream9 {
-  public int[] tryIterate() {
-    return IntStream.iterate(1, i -> i < 5, i -> i + 1).toArray();
+public class TryPrivateInterfaceMethod {
+  public List<String> tryDefaultMethods() {
+    MyInterface o = () -> "bob";
+    return List.of(o.getRunMessage(), o.getWalkMessage());
   }
 
-  public Stream<Integer> tryOptionalStream() {
-    return Optional.of(1).stream();
+  public interface MyInterface {
+    String getName();
+
+    default String getRunMessage() {
+      return getMessage("run");
+    }
+
+    default String getWalkMessage() {
+      return getMessage("walk");
+    }
+
+    private String getMessage(String verb) {
+      return String.format("Please %s %s", verb, getName());
+    }
   }
 }
