@@ -23,9 +23,9 @@ import com.purplepip.music.Song;
 import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
-public class AdapterTest {
+class AdapterTest {
   @Test
-  public void testAdapter() {
+  void testAdapter() {
     Sequence sequence = new Sequence(
         new HashSet<>(asList(
             new Note(60,10),

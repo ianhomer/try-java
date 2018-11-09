@@ -20,24 +20,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class TryFunctionTest {
+class TryFunctionTest {
   @Test
-  public void testWithTrial() {
+  void testWithTrial() {
     assertExecution(TryFunction.class);
   }
 
   @Test
-  public void tryFunction() {
+  void tryFunction() {
     assertEquals("faster, faster : faster, faster", new TryFunction().tryFunction());
   }
 
   @Test
-  public void tryInlineLambda() {
+  void tryInlineLambda() {
     assertEquals("faster, faster : faster, faster", new TryFunction().tryInlineLambda());
   }
 
   @Test
-  public void tryNonFunctionalAlternativeToInlineLambda() {
+  void tryNonFunctionalAlternativeToInlineLambda() {
     assertEquals("faster, faster : faster, faster", new TryFunction()
         .tryNonFunctionalAlternativeToInlineLambda());
   }

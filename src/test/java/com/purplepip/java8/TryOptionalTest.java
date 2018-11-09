@@ -22,14 +22,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.purplepip.music.Song;
 import org.junit.jupiter.api.Test;
 
-public class TryOptionalTest {
+class TryOptionalTest {
   @Test
-  public void testWithTrial() {
+  void testWithTrial() {
     assertExecution(TryOptional.class);
   }
 
   @Test
-  public void testCaseReturn() {
+  void testCaseReturn() {
     assertEquals("faster, faster", new TryOptional().getMessage(new Song().genres(PUNK)));
     assertEquals("why no song?", new TryOptional().getMessage(null));
     assertEquals("faster, faster", new TryOptional()

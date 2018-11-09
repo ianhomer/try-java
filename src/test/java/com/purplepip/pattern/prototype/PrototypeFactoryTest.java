@@ -21,9 +21,9 @@ import com.purplepip.music.Genre;
 import com.purplepip.music.Song;
 import org.junit.jupiter.api.Test;
 
-public class PrototypeFactoryTest {
+class PrototypeFactoryTest {
   @Test
-  public void testPrototypeFactory() {
+  void testPrototypeFactory() {
     Song prototype = new Song().name("prototype").genres(Genre.PUNK, Genre.JAZZ);
     MyPrototypeFactory<Song> factory = new SongFactory(prototype);
     assertEquals(factory.make(), prototype);

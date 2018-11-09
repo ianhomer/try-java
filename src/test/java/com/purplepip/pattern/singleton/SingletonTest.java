@@ -20,15 +20,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.function.Supplier;
 import org.junit.jupiter.api.Test;
 
-public class SingletonTest {
+class SingletonTest {
   @Test
-  public void testEnumSingleton() {
+  void testEnumSingleton() {
     Supplier<MySingleton> supplier = () -> SingletonEnum.INSTANCE;
     assertEquals(supplier.get().getSeed(), supplier.get().getSeed());
   }
 
   @Test
-  public void testDoubleCheckedLockingSingleton() {
+  void testDoubleCheckedLockingSingleton() {
     Supplier<MySingleton> supplier = () -> DoubleCheckedLockingSingleton.getInstance();
     assertEquals(supplier.get().getSeed(), supplier.get().getSeed());
   }

@@ -19,9 +19,9 @@ import static com.purplepip.trial.TrialAssert.assertExecution;
 
 import org.junit.jupiter.api.Test;
 
-public class TryPrivateInterfaceMethodTest {
+class TryPrivateInterfaceMethodTest {
   @Test
-  public void testWithTrial() {
+  void testWithTrial() {
     assertExecution(TryPrivateInterfaceMethod.class);
   }
 }

@@ -24,24 +24,24 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
-public class TryStreamTest {
+class TryStreamTest {
   @Test
-  public void testWithTrial() {
+  void testWithTrial() {
     assertExecution(TryStream.class);
   }
 
   @Test
-  public void testReduce() {
+  void testReduce() {
     new TryStream().tryReduce();
   }
 
   @Test
-  public void testSum() {
+  void testSum() {
     assertTrue(new TryStream().trySum() > 10);
   }
 
   @Test
-  public void testIterator() {
+  void testIterator() {
     Iterator<Song> iterator = new TryStream().tryIterator();
     assertTrue(iterator.hasNext());
   }

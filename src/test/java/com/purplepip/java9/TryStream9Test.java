@@ -19,9 +19,9 @@ import static com.purplepip.trial.TrialAssert.assertExecution;
 
 import org.junit.jupiter.api.Test;
 
-public class TryStream9Test {
+class TryStream9Test {
   @Test
-  public void testWithTrial() {
+  void testWithTrial() {
     assertExecution(TryStream9.class);
   }
 }

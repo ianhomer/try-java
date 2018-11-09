@@ -19,15 +19,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class TrialTest {
+class TrialTest {
   @Test
-  public void testTrial() {
+  void testTrial() {
     Execution execution = new Trial(TrySomething.class).run();
     assertTrue(execution.getCount() > 0);
   }
 
   @Test
-  public void testMain() {
+  void testMain() {
     Trial.main(new String[] {"com.purplepip.trial.TrialTest$TrySomething"});
   }
 
