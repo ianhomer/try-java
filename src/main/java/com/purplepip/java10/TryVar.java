@@ -15,6 +15,7 @@
 
 package com.purplepip.java10;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,8 @@ public class TryVar {
   public Optional<String> tryVar() {
     var values = List.of("x", "y", "z");
     var x = Optional.of("test");
+    var map = new HashMap<String, List<String>>();
+    map.put(x.get(), values);
     return x;
   }
 }
