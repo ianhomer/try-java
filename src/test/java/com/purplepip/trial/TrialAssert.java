@@ -15,11 +15,11 @@
 
 package com.purplepip.trial;
 
-import org.junit.Assert;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TrialAssert {
   public static void assertExecution(Class<?> clazz) {
     Execution execution = new Trial(clazz).run();
-    Assert.assertTrue(execution.getCount() > 0);
+    assertTrue(execution.getCount() > 0);
   }
 }

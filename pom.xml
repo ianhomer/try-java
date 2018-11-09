@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>project-parent</artifactId>
     <groupId>com.purplepip</groupId>
-    <version>1.0.7</version>
+    <artifactId>starter</artifactId>
+    <version>1.0.9</version>
   </parent>
 
   <artifactId>try-java</artifactId>
@@ -12,8 +12,7 @@
   <version>1.0.0-SNAPSHOT</version>
 
   <properties>
-    <java.version>1.9</java.version>
-    <jacoco.argLine/>
+    <java.version>9</java.version>
     <try/>
     <logback.debug>false</logback.debug>
   </properties>
@@ -23,6 +22,25 @@
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
       <version>2.0.1.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
     </dependency>
   </dependencies>
   

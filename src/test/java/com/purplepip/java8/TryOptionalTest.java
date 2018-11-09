@@ -17,10 +17,10 @@ package com.purplepip.java8;
 
 import static com.purplepip.music.Genre.PUNK;
 import static com.purplepip.trial.TrialAssert.assertExecution;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.purplepip.music.Song;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TryOptionalTest {
   @Test

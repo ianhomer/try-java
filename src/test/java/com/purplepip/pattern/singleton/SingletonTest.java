@@ -15,41 +15,22 @@
 
 package com.purplepip.pattern.singleton;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.purplepip.pattern.singleton.DoubleCheckedLockingSingleton;
-import com.purplepip.pattern.singleton.MySingleton;
-import com.purplepip.pattern.singleton.SingletonEnum;
 import java.util.function.Supplier;
-import org.assertj.core.util.Lists;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.Test;
 
-@RunWith(Parameterized.class)
 public class SingletonTest {
-  private Supplier<MySingleton> supplier;
-
-  public SingletonTest(Supplier<MySingleton> supplier) {
-    this.supplier = supplier;
-  }
-
-  /**
-   * Get parameters for tests.
-   *
-   * @return parameters
-   */
-  @Parameterized.Parameters
-  public static Iterable<Supplier<MySingleton>> parameters() {
-    return Lists.newArrayList(
-        DoubleCheckedLockingSingleton::getInstance,
-        () -> SingletonEnum.INSTANCE
-    );
+  @Test
+  public void testEnumSingleton() {
+    Supplier<MySingleton> supplier = () -> SingletonEnum.INSTANCE;
+    assertEquals(supplier.get().getSeed(), supplier.get().getSeed());
   }
 
   @Test
-  public void testSingleton() {
-    MySingleton singleton = supplier.get();
-    assertEquals(supplier.get().getSeed(), singleton.getSeed());
+  public void testDoubleCheckedLockingSingleton() {
+    Supplier<MySingleton> supplier = () -> DoubleCheckedLockingSingleton.getInstance();
+    assertEquals(supplier.get().getSeed(), supplier.get().getSeed());
   }
+
 }

@@ -17,7 +17,7 @@ package com.purplepip.java8;
 
 import static com.purplepip.trial.TrialAssert.assertExecution;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TryTimeTest {
   @Test

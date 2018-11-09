@@ -16,12 +16,12 @@
 package com.purplepip.java8;
 
 import static com.purplepip.trial.TrialAssert.assertExecution;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.purplepip.music.Song;
 import java.util.Iterator;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 @Slf4j
 public class TryStreamTest {

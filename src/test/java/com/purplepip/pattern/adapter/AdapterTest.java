@@ -15,21 +15,22 @@
 
 package com.purplepip.pattern.adapter;
 
-import static org.junit.Assert.assertEquals;
+import static java.util.Arrays.asList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.purplepip.music.Note;
 import com.purplepip.music.Song;
-import org.junit.Test;
-import org.mockito.internal.util.collections.Sets;
+import java.util.HashSet;
+import org.junit.jupiter.api.Test;
 
 public class AdapterTest {
   @Test
   public void testAdapter() {
     Sequence sequence = new Sequence(
-        Sets.newSet(
+        new HashSet<>(asList(
             new Note(60,10),
             new Note(72,20)
-        )
+        ))
     );
     Song song = new SequenceSong(new Song().name("adapted"), sequence);
     song.play();
