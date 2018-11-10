@@ -20,6 +20,11 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Execute all try methods on a class simply to execute the code, demonstrating and validating
+ * usage.   This is just a light weight way to explore functionality by triggering the
+ * example code.
+ */
 @Slf4j
 public class Trial {
   private final Class<?> clazz;
@@ -61,7 +66,7 @@ public class Trial {
    *
    * @param clazz class providing try methods.
    */
-  public Trial(Class<?> clazz) {
+  Trial(Class<?> clazz) {
     this.clazz = clazz;
   }
 
@@ -72,7 +77,7 @@ public class Trial {
   /**
    * Run trial.
    */
-  public Execution run() {
+  Execution run() {
     ValueLogger logger = new ValueLogger(clazz);
     final Execution execution = new Execution();
     Arrays.stream(clazz.getMethods())
